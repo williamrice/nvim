@@ -73,8 +73,18 @@ return {
 						},
 					})
 				end,
+				["ts_ls"] = function ()
+				local lspconfig = require("lspconfig")
+				lspconfig.ts_ls.setup({
+					capabilities = capabilities,
+				})
+				end
 			},
 		})
+
+		----------------------------------------------------------------------
+		-- Cmp configuration
+		----------------------------------------------------------------------
 
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
