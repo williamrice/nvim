@@ -35,7 +35,6 @@ return {
 		require("mason-lspconfig").setup({
 			ensure_installed = {
 				"lua_ls",
-				"ts_ls",
 			},
 			handlers = {
 				function(server_name) -- default handler (optional)
@@ -73,12 +72,6 @@ return {
 						},
 					})
 				end,
-				["ts_ls"] = function ()
-				local lspconfig = require("lspconfig")
-				lspconfig.ts_ls.setup({
-					capabilities = capabilities,
-				})
-				end
 			},
 		})
 
