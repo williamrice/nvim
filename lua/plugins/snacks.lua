@@ -1,9 +1,22 @@
+local header = [[
+____    __    ____  ___      .______      
+\   \  /  \  /   / /   \     |   _  \     
+ \   \/    \/   / /  ^  \    |  |_)  |    
+  \            / /  /_\  \   |      /     
+   \    /\    / /  _____  \  |  |\  \----.
+    \__/  \__/ /__/     \__\ | _| `._____|]]
+
 return {
 	"folke/snacks.nvim",
 	enabled = true,
 	lazy = false,
 	opts = {
-		dashboard = { enabled = true },
+		dashboard = {
+			enabled = true,
+			preset = {
+				header = header
+			},
+		},
 		indent = {
 			enabled = true,
 			chunk = {
