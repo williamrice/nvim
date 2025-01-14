@@ -3,5 +3,7 @@ return {
 	enabled = true,
 	lazy = false,
 	priority = 999,
-	config = function() vim.cmd.colorscheme "nightfox" end 
+	config = function()
+		vim.cmd.colorscheme("nightfox")
+	end,
 }
