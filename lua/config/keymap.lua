@@ -11,6 +11,8 @@ keymap.set("n", "x", '"_x')
 keymap.set("n", "<leader>+", "<C-a>")
 
 keymap.set("n", "<leader>-", "<C-x>")
+keymap.set("v", ">", ">gv", { desc = "Increase Indentation." })
+keymap.set("v", "<", "<gv", { desc = "Decrease Indentation." })
 
 -- Split windows keys
 keymap.set("n", "<leader>sv", "<C-w>v")
@@ -33,7 +35,7 @@ keymap.set("n", "<C-l>", "<C-w>l", { desc = "Navigate to Right Pane." })
 -- Plugin Keybinds
 ----------------------
 --lsp
-keymap.set("n", "<leader>gs", "<cmd>TSToolsGoToSourceDefinition<cr>", {desc = "Goes to source definition"})
+keymap.set("n", "<leader>gs", "<cmd>TSToolsGoToSourceDefinition<cr>", { desc = "Goes to source definition" })
 
 -- conform formatter
 keymap.set({ "n", "v" }, "<leader>f", function()
@@ -59,7 +61,7 @@ keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>") -- list available 
 keymap.set("n", "<leader>km", "<cmd>Telescope keymaps<cr>") -- list keymapping
 
 -- telescope git commands
-keymap.set( "n", "<leader>gb", "<cmd>GitBlameToggle<cr>", { desc = "Toggle Git Blame View." })
+keymap.set("n", "<leader>gb", "<cmd>GitBlameToggle<cr>", { desc = "Toggle Git Blame View." })
 
 -- restart lsp server
 keymap.set("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
