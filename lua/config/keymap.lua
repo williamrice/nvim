@@ -36,7 +36,7 @@ keymap.set("n", "<C-l>", "<C-w>l", { desc = "Navigate to Right Pane." })
 ----------------------
 --lsp
 keymap.set("n", "<leader>gs", "<cmd>TSToolsGoToSourceDefinition<cr>", { desc = "Goes to source definition" })
-
+keymap.set("n", "<leader>ge", vim.diagnostic.open_float, { desc = "Show line diagnostics" })
 -- conform formatter
 keymap.set({ "n", "v" }, "<leader>f", function()
 	conform.format({
@@ -75,3 +75,25 @@ keymap.set("n", "<S-h>", "<CMD>BufferLineCyclePrev<CR>")
 keymap.set("n", "<S-]>", "<CMD>BufferLineMoveNext<CR>")
 keymap.set("n", "<S-[>", "<CMD>BufferLineMovePrev<CR>")
 keymap.set("n", "ts", "<CMD>BufferLineSortByDirectory<CR>")
+
+-- package json info
+-- Show dependency versions
+keymap.set({ "n" }, "<LEADER>ns", require("package-info").show, { silent = true, noremap = true })
+
+-- Hide dependency versions
+keymap.set({ "n" }, "<LEADER>nc", require("package-info").hide, { silent = true, noremap = true })
+
+-- Toggle dependency versions
+keymap.set({ "n" }, "<LEADER>nt", require("package-info").toggle, { silent = true, noremap = true })
+
+-- Update dependency on the line
+keymap.set({ "n" }, "<LEADER>nu", require("package-info").update, { silent = true, noremap = true })
+
+-- Delete dependency on the line
+keymap.set({ "n" }, "<LEADER>nd", require("package-info").delete, { silent = true, noremap = true })
+
+-- Install a new dependency
+keymap.set({ "n" }, "<LEADER>ni", require("package-info").install, { silent = true, noremap = true })
+
+-- Install a different dependency version
+keymap.set({ "n" }, "<LEADER>np", require("package-info").change_version, { silent = true, noremap = true })
