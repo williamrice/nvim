@@ -51,5 +51,5 @@ opt.hlsearch = false
 
 opt.undofile = true
 opt.updatetime = 250
-opt.timeoutlen = 300
+opt.timeoutlen = 5000
 opt.inccommand = "split"
