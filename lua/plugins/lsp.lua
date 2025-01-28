@@ -52,6 +52,7 @@ return {
 				"lua_ls",
 				"intelephense",
 				"astro",
+				"pyright",
 			},
 			handlers = {
 				function(server_name) -- default handler (optional)
@@ -93,6 +94,13 @@ return {
 						filetypes = { "astro" },
 					})
 				end,
+				["pyright"] = function()
+					local lspconfig = require("lspconfig")
+					lspconfig.pyright.setup({
+						capabilities = capabilities,
+						on_attach = on_attach
+					})
+				end
 			},
 		})
 		vim.diagnostic.config({
