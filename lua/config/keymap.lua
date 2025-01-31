@@ -35,7 +35,7 @@ keymap.set("n", "<C-l>", "<C-w>l", { desc = "Navigate to Right Pane." })
 -- Plugin Keybinds
 ----------------------
 --lsp
-keymap.set("n", "<leader>gs", "<cmd>TSToolsGoToSourceDefinition<cr>", { desc = "Goes to source definition" })
+keymap.set("n", "<leader>gts", "<cmd>TSToolsGoToSourceDefinition<cr>", { desc = "Goes to source definition" })
 keymap.set("n", "<leader>ge", vim.diagnostic.open_float, { desc = "Show line diagnostics" })
 -- conform formatter
 keymap.set({ "n", "v" }, "<leader>f", function()
@@ -62,9 +62,6 @@ keymap.set("n", "<leader>km", "<cmd>Telescope keymaps<cr>") -- list keymapping
 
 -- telescope git commands
 keymap.set("n", "<leader>gb", "<cmd>GitBlameToggle<cr>", { desc = "Toggle Git Blame View." })
-
--- restart lsp server
-keymap.set("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
 
 -- bufferline
 keymap.set("n", "<leader>q", ":bd<CR>")
