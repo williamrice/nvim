@@ -5,6 +5,7 @@ local conform = require("conform")
 keymap.set("i", "jk", "<ESC>")
 
 keymap.set("n", "<leader>nh", ":nohl<CR>")
+keymap.set("n", "<leader>sf", ":noa w<CR>", { desc = "Saves the buffer without formatting" })
 
 keymap.set("n", "x", '"_x')
 
