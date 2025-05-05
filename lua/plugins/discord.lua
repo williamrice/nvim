@@ -1,11 +1,11 @@
 local should_enable = true
 local os_name = vim.loop.os_uname().sysname
-if os_name == 'Linux' or os_name:match 'BSD$' then
+if os_name == "Linux" or os_name:match("BSD$") then
 	should_enable = false
 end
 return {
 	"vyfor/cord.nvim",
-	branch = "client-server",
+	branch = "master",
 	build = ":Cord update",
 	enabled = should_enable,
 	opts = {
