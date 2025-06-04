@@ -14,6 +14,7 @@ keymap.set("n", "<leader>+", "<C-a>")
 keymap.set("n", "<leader>-", "<C-x>")
 keymap.set("v", ">", ">gv", { desc = "Increase Indentation." })
 keymap.set("v", "<", "<gv", { desc = "Decrease Indentation." })
+keymap.set("n", "<C-a>", "ggVG", { desc = "Select All." })
 
 -- Split windows keys
 keymap.set("n", "<leader>sv", "<C-w>v")
