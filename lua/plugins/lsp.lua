@@ -55,56 +55,81 @@ return {
 				"astro",
 				"pyright",
 			},
-			handlers = {
-				function(server_name) -- default handler (optional)
-					require("lspconfig")[server_name].setup({
-						capabilities = capabilities,
-						on_attach = on_attach,
-					})
-				end,
-				["lua_ls"] = function()
-					local lspconfig = require("lspconfig")
-					lspconfig.lua_ls.setup({
-						capabilities = capabilities,
-						on_attach = on_attach,
-						settings = {
-							Lua = {
-								runtime = { version = "Lua 5.1" },
-								diagnostics = {
-									globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
-								},
-							},
-						},
-					})
-				end,
-				["intelephense"] = function()
-					local lspconfig = require("lspconfig")
-					local php_settings = require("config.php-settings")
-					lspconfig.intelephense.setup({
-						root_dir = lspconfig.util.root_pattern("composer.json", ".git", "wp-config.php"),
-						capabilities = capabilities,
-						on_attach = on_attach,
-						settings = php_settings.getPhpSettings(),
-					})
-				end,
-				["astro"] = function()
-					local lspconfig = require("lspconfig")
-					lspconfig.astro.setup({
-						capabilities = capabilities,
-						on_attach = on_attach,
-						filetypes = { "astro" },
-					})
-				end,
-				["pyright"] = function()
-					local lspconfig = require("lspconfig")
-					lspconfig.pyright.setup({
-						capabilities = capabilities,
-						on_attach = on_attach,
-					})
-				end,
+			-- handlers = {
+			-- 	function(server_name) -- default handler (optional)
+			-- 		require("lspconfig")[server_name].setup({
+			-- 			capabilities = capabilities,
+			-- 			on_attach = on_attach,
+			-- 		})
+			-- 	end,
+			-- 	["lua_ls"] = function()
+			-- 		local lspconfig = require("lspconfig")
+			-- 		lspconfig.lua_ls.setup({
+			-- 			capabilities = capabilities,
+			-- 			on_attach = on_attach,
+			-- 			settings = {
+			-- 				Lua = {
+			-- 					runtime = { version = "Lua 5.1" },
+			-- 					diagnostics = {
+			-- 						globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
+			-- 					},
+			-- 				},
+			-- 			},
+			-- 		})
+			-- 	end,
+			-- 	["intelephense"] = function()
+			-- 		local lspconfig = require("lspconfig")
+			-- 		local php_settings = require("config.php-settings")
+			-- 		lspconfig.intelephense.setup({
+			-- 			root_dir = lspconfig.util.root_pattern("composer.json", ".git", "wp-config.php"),
+			-- 			capabilities = capabilities,
+			-- 			on_attach = on_attach,
+			-- 			settings = php_settings.getPhpSettings(),
+			-- 		})
+			-- 	end,
+			-- 	["astro"] = function()
+			-- 		local lspconfig = require("lspconfig")
+			-- 		lspconfig.astro.setup({
+			-- 			capabilities = capabilities,
+			-- 			on_attach = on_attach,
+			-- 			filetypes = { "astro" },
+			-- 		})
+			-- 	end,
+			-- 	["pyright"] = function()
+			-- 		local lspconfig = require("lspconfig")
+			-- 		lspconfig.pyright.setup({
+			-- 			capabilities = capabilities,
+			-- 			on_attach = on_attach,
+			-- 		})
+			-- 	end,
+			-- },
+		})
+		-- lsp setup TODO: refactor to modules
+		local lspconfig = require("lspconfig")
+		local php_settings = require("config.php-settings")
+		-- PHP lsp
+		lspconfig.intelephense.setup({
+			root_dir = lspconfig.util.root_pattern("composer.json", ".git", "wp-config.php"),
+			capabilities = capabilities,
+			on_attach = on_attach,
+			settings = php_settings.getPhpSettings(),
+		})
+		--LUA lsp
+		lspconfig.lua_ls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			settings = {
+				Lua = {
+					runtime = { version = "Lua 5.1" },
+					diagnostics = {
+						globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
+					},
+				},
 			},
 		})
+
 		vim.diagnostic.config({
+
 			-- update_in_insert = true,
 			virtual_text = true,
 			float = {
