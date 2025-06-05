@@ -1,9 +1,11 @@
 local M = {}
 function M.getPhpSettings()
+	local composer_path = vim.fn.expand("$HOME/.composer/vendor/php-stubs/")
+	print("Composer path: " .. composer_path)
 	return {
 		intelephense = {
 			files = {
-				maxSize = 5000000,
+				maxSize = 10000000,
 			},
 			stubs = {
 				"amqp",
@@ -177,7 +179,7 @@ function M.getPhpSettings()
 			environment = {
 				includePaths = {
 					"/usr/include/php",
-					"~/.composer/vendor",
+					composer_path,
 				},
 			},
 		},
