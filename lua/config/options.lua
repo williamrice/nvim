@@ -53,3 +53,9 @@ opt.undofile = true
 opt.updatetime = 250
 opt.timeoutlen = 5000
 opt.inccommand = "split"
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+})

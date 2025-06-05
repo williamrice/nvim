@@ -1,6 +1,6 @@
 local M = {}
 function M.getPhpSettings()
-	local composer_path = vim.fn.expand("$HOME/.composer/vendor/php-stubs/")
+	local composer_path = vim.fn.expand("$HOME/.composer/vendor/")
 	print("Composer path: " .. composer_path)
 	return {
 		intelephense = {
