@@ -22,6 +22,7 @@ return {
 					},
 				},
 			},
+			extensions = { "neo-tree" },
 		},
 	},
 }
