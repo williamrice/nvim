@@ -36,6 +36,15 @@ keymap.set("n", "<C-l>", "<C-w>l", { desc = "Navigate to Right Pane." })
 ----------------------
 -- Plugin Keybinds
 ----------------------
+keymap.set({ "i", "n" }, "<C-Bslash>", function()
+	if vim.b.copilot_enabled == nil then
+		vim.b.copilot_enabled = true
+	end
+
+	vim.b.copilot_enabled = not vim.b.copilot_enabled
+
+	vim.print("Copilot enabled: " .. tostring(vim.b.copilot_enabled))
+end, { desc = "Toggle copilot" })
 --lsp
 keymap.set("n", "<leader>gts", "<cmd>TSToolsGoToSourceDefinition<cr>",
 	{ desc = "Goes to source definition in typescript file" })
