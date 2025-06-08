@@ -61,6 +61,7 @@ return {
 				"intelephense",
 				"astro",
 				"pyright",
+				"tailwindcss",
 			},
 		})
 		-- lsp setup TODO: refactor to modules
@@ -108,6 +109,16 @@ return {
 				},
 			},
 		})
+		-- TAILWINDCSS lsp
+		lspconfig.tailwindcss.setup({
+			capabilities = capabilities,
+		})
+
+		-- Docker lsp
+		vim.lsp.enable("docker_compose_language_service")
+		vim.lsp.enable("dockerls")
+
+		-- Dianostic configuration
 		vim.diagnostic.config({
 			-- update_in_insert = true,
 			virtual_text = true,
