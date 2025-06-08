@@ -1,9 +1,10 @@
 return {
-	"Zonric/codecopy.nvim",
+	-- "Zonric/codecopy.nvim",
+	dir = vim.fn.expand("$HOME/dev/codecopy.nvim"),
 	enabled = true,
 	lazy = true,
 	event = "VeryLazy",
-	debug = true,
+	debug = false,
 	opts = {
 		notify = true,
 	},
