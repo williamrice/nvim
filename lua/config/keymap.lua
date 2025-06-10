@@ -101,6 +101,15 @@ end, { desc = "List Neovim config files." })
 keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "List recently opened files." })
 keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "List available help tags." })
 keymap.set("n", "<leader>km", "<cmd>Telescope keymaps<cr>", { desc = "List keymappings." })
+local fuzzy_search = function()
+	require("telescope.builtin").grep_string({
+		shorten_path = true,
+		word_match = "-w",
+		only_sort_text = true,
+		search = "",
+	})
+end
+vim.keymap.set("n", "<leader>fg", fuzzy_search, { desc = "Telescope fuzzy Grep" })
 
 -- telescope git commands
 keymap.set("n", "<leader>gb", "<cmd>GitBlameToggle<cr>", { desc = "Toggle Git blame view." })
