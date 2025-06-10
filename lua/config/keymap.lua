@@ -120,8 +120,8 @@ keymap.set("n", "<leader>tp", "<CMD>BufferLinePick<CR>", { desc = "Pick a buffer
 keymap.set("n", "<leader>tc", "<CMD>BufferLinePickClose<CR>", { desc = "Pick a buffer to close." })
 keymap.set("n", "<S-l>", "<CMD>BufferLineCycleNext<CR>", { desc = "Go to next buffer." })
 keymap.set("n", "<S-h>", "<CMD>BufferLineCyclePrev<CR>", { desc = "Go to previous buffer." })
-keymap.set("n", "<S-]>", "<CMD>BufferLineMoveNext<CR>", { desc = "Move buffer to next position." })
-keymap.set("n", "<S-[>", "<CMD>BufferLineMovePrev<CR>", { desc = "Move buffer to previous position." })
+keymap.set("n", "<S-Right>", "<CMD>BufferLineMoveNext<CR>", { desc = "Move buffer to next position." })
+keymap.set("n", "<S-Left>", "<CMD>BufferLineMovePrev<CR>", { desc = "Move buffer to previous position." })
 keymap.set("n", "<leader>ts", "<CMD>BufferLineSortByDirectory<CR>", { desc = "Sort buffers by directory." })
 
 -- package json info
