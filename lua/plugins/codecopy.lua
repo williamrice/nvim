@@ -7,5 +7,8 @@ return {
 	debug = false,
 	opts = {
 		notify = true,
+		env = {
+			enabled = true,
+		},
 	},
 }
