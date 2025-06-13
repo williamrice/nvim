@@ -42,12 +42,13 @@ keymap.set("n", "<C-l>", "<C-w>l", { desc = "Navigate to right pane." })
 ----------------------
 -- Code copy
 keymap.set({ "i", "n" }, "<C-Bslash>", function()
-	if vim.b.copilot_enabled == nil then
-		vim.b.copilot_enabled = true
-	end
-	vim.b.copilot_enabled = not vim.b.copilot_enabled
-	vim.print("Copilot enabled: " .. tostring(vim.b.copilot_enabled))
-end, { desc = "Toggle Copilot." })
+	-- if vim.b.copilot_enabled == nil then
+	-- 	vim.b.copilot_enabled = true
+	-- end
+	-- vim.b.copilot_enabled = not vim.b.copilot_enabled
+	-- vim.print("Copilot enabled: " .. tostring(vim.b.copilot_enabled))
+	require("supermaven-nvim.api").toggle()
+end, { desc = "Toggle supermaven." })
 
 -- lsp
 keymap.set(
