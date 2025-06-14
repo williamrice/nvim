@@ -41,6 +41,7 @@ keymap.set("n", "<C-l>", "<C-w>l", { desc = "Navigate to right pane." })
 -- Plugin Keybinds
 ----------------------
 -- Code copy
+keymap.set("n", "<leader>cr", "<CMD>Lazy reload codecopy.nvim<CR>", { desc = "reload code copy" })
 keymap.set({ "i", "n" }, "<C-Bslash>", function()
 	-- if vim.b.copilot_enabled == nil then
 	-- 	vim.b.copilot_enabled = true
