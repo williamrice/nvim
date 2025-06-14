@@ -96,9 +96,7 @@ return {
 		})
 		-- C# lsp
 		vim.lsp.config("roslyn", {
-			on_attach = function()
-				print("This will run when the server attaches!")
-			end,
+			on_attach = function() end,
 			settings = {
 				["csharp|inlay_hints"] = {
 					csharp_enable_inlay_hints_for_implicit_object_creation = true,
