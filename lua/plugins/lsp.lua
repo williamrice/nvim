@@ -4,7 +4,6 @@ return {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
 		"j-hui/fidget.nvim",
-		"jay-babu/mason-nvim-dap.nvim",
 	},
 	config = function()
 		local cmp_lsp = require("cmp_nvim_lsp")
@@ -54,8 +53,6 @@ return {
 				"github:Crashdummyy/mason-registry",
 			},
 		})
-		require("mason-nvim-dap").setup({ ensure_installed = {}, automatic_installation = false, handlers = {} })
-		require("dap-cs").setup()
 		require("mason-lspconfig").setup({
 			automatic_installation = true,
 			automatic_enable = false,
