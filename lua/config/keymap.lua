@@ -1,5 +1,7 @@
 local keymap = vim.keymap
 local conform = require("conform")
+local dap = require("dap")
+local dapui = require("dapui")
 
 -- general keymaps
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode." })
@@ -37,11 +39,37 @@ keymap.set("n", "<C-j>", "<C-w>j", { desc = "Navigate to pane below." })
 keymap.set("n", "<C-k>", "<C-w>k", { desc = "Navigate to pane above." })
 keymap.set("n", "<C-l>", "<C-w>l", { desc = "Navigate to right pane." })
 
-----------------------
+-- Debugging Keymaps
+keymap.set("n", "<leader>db", dap.toggle_breakpoint)
+keymap.set("n", "<leader>dc", dap.run_to_cursor)
+
+-- run lua server
+vim.keymap.set("n", "<leader>dl", function()
+	require("osv").launch({ port = 8086 })
+end, { noremap = true })
+
+-- Eval var under cursor
+keymap.set("n", "<leader>?", function()
+	--- @diagnostic disable-next-line: missing-fields
+	require("dapui").eval(nil, { enter = true })
+end)
+
+keymap.set("n", "<leader>du", function()
+	dapui.toggle()
+end)
+
+keymap.set("n", "<F1>", dap.continue)
+keymap.set("n", "<F2>", dap.step_into)
+keymap.set("n", "<F3>", dap.step_over)
+keymap.set("n", "<F4>", dap.step_out)
+keymap.set("n", "<F5>", dap.step_back)
+keymap.set("n", "<leader>dr", dap.restart)
+
 -- Plugin Keybinds
 ----------------------
 -- Code copy
 keymap.set("n", "<leader>cr", "<CMD>Lazy reload codecopy.nvim<CR>", { desc = "reload code copy" })
+keymap.set("n", "<leader>cc", "<CMD>CodeCopy<CR>", { desc = "copy code" })
 keymap.set({ "i", "n" }, "<C-Bslash>", function()
 	-- if vim.b.copilot_enabled == nil then
 	-- 	vim.b.copilot_enabled = true
