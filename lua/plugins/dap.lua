@@ -8,6 +8,8 @@ return {
 			"nvim-neotest/nvim-nio",
 			"williamboman/mason.nvim",
 			"jbyuki/one-small-step-for-vimkind",
+			"nicholasmata/nvim-dap-cs",
+			"jay-babu/mason-nvim-dap.nvim",
 		},
 		config = function()
 			local dap = require("dap")
@@ -16,6 +18,7 @@ return {
 			require("dapui").setup()
 			require("dap-cs").setup()
 
+			--- @diagnostic disable-next-line: missing-fields
 			require("nvim-dap-virtual-text").setup({
 				-- This just tries to mitigate the chance that I leak tokens here. Probably won't stop it from happening...
 				display_callback = function(variable)
@@ -79,6 +82,7 @@ return {
 
 			-- Eval var under cursor
 			vim.keymap.set("n", "<space>?", function()
+				--- @diagnostic disable-next-line: missing-fields
 				require("dapui").eval(nil, { enter = true })
 			end)
 
