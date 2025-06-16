@@ -6,10 +6,13 @@ return {
 		"onsails/lspkind.nvim",
 		"hrsh7th/cmp-nvim-lsp-signature-help",
 		"L3MON4D3/LuaSnip",
+		"mlaursen/vim-react-snippets",
 	},
 	opts = function(_, opts)
 		local cmp = require("cmp")
 		local lspkind = require("lspkind")
+		require("luasnip.loaders.from_vscode").lazy_load()
+		require("vim-react-snippets").lazy_load()
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }
 		opts.sources = opts.sources or {}
 		table.insert(opts.sources, {
