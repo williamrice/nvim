@@ -6,6 +6,7 @@ return {
 		"onsails/lspkind.nvim",
 		"hrsh7th/cmp-nvim-lsp-signature-help",
 		"L3MON4D3/LuaSnip",
+		"saadparwaiz1/cmp_luasnip",
 		"mlaursen/vim-react-snippets",
 	},
 	opts = function(_, opts)
