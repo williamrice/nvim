@@ -115,6 +115,7 @@ return {
 		-- Docker lsp
 		vim.lsp.enable("docker_compose_language_service")
 		vim.lsp.enable("dockerls")
+		vim.lsp.enable("prismals")
 
 		-- Dianostic configuration
 		vim.diagnostic.config({
