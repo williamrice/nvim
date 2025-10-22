@@ -114,6 +114,16 @@ return {
 			capabilities = capabilities,
 		}
 
+		-- HTML
+		vim.lsp.config.html = {
+			capabilities = capabilities,
+		}
+
+		-- CSS
+		vim.lsp.config.cssls = {
+			capabilities = capabilities,
+		}
+
 		-- Enable LSP servers
 		vim.lsp.enable("intelephense")
 		vim.lsp.enable("lua_ls")
@@ -124,6 +134,8 @@ return {
 		vim.lsp.enable("docker_compose_language_service")
 		vim.lsp.enable("dockerls")
 		vim.lsp.enable("prismals")
+		vim.lsp.enable("html")
+		vim.lsp.enable("cssls")
 
 		-- Diagnostic configuration
 		vim.diagnostic.config({
