@@ -12,8 +12,6 @@ return {
 	opts = function(_, opts)
 		local cmp = require("cmp")
 		local lspkind = require("lspkind")
-		require("luasnip.loaders.from_vscode").lazy_load()
-		require("vim-react-snippets").lazy_load()
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }
 		opts.sources = opts.sources or {}
 		table.insert(opts.sources, {
