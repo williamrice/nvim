@@ -16,7 +16,6 @@ return {
 
 		vim.api.nvim_create_autocmd("LspAttach", {
 			callback = function(args)
-				print("LSP started.")
 				local opts = { noremap = true, silent = true }
 				local bufnr = args.buf
 				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gs", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
