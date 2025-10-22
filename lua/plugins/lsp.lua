@@ -13,6 +13,7 @@ return {
 			vim.lsp.protocol.make_client_capabilities(),
 			cmp_lsp.default_capabilities()
 		)
+
 		vim.api.nvim_create_autocmd("LspAttach", {
 			callback = function(args)
 				print("LSP started.")
@@ -24,10 +25,8 @@ return {
 				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 				vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-				-- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>s", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-				-- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 				vim.api.nvim_buf_set_keymap(
 					bufnr,
 					"n",
@@ -42,10 +41,10 @@ return {
 					'<cmd>lua vim.diagnostic.goto_next({ border = "single" })<CR>',
 					opts
 				)
-				-- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 				vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format(nil)' ]])
 			end,
 		})
+
 		require("fidget").setup({})
 		require("mason").setup({
 			registries = {
@@ -64,17 +63,18 @@ return {
 				"tailwindcss",
 			},
 		})
-		-- lsp setup TODO: refactor to modules
-		local lspconfig = require("lspconfig")
+
 		local php_settings = require("config.php-settings")
-		-- PHP lsp
-		lspconfig.intelephense.setup({
-			root_dir = lspconfig.util.root_pattern("composer.json", ".git", "wp-config.php"),
+
+		-- PHP
+		vim.lsp.config.intelephense = {
+			root_markers = { "composer.json", ".git", "wp-config.php" },
 			capabilities = capabilities,
 			settings = php_settings.getPhpSettings(),
-		})
-		--LUA lsp
-		lspconfig.lua_ls.setup({
+		}
+
+		-- Lua
+		vim.lsp.config.lua_ls = {
 			capabilities = capabilities,
 			settings = {
 				Lua = {
@@ -84,19 +84,21 @@ return {
 					},
 				},
 			},
-		})
-		-- ASTRO lsp
-		lspconfig.astro.setup({
+		}
+
+		-- Astro
+		vim.lsp.config.astro = {
 			capabilities = capabilities,
 			filetypes = { "astro" },
-		})
-		-- PYTHON lsp
-		lspconfig.pyright.setup({
+		}
+
+		-- Python
+		vim.lsp.config.pyright = {
 			capabilities = capabilities,
-		})
-		-- C# lsp
-		vim.lsp.config("roslyn", {
-			on_attach = function() end,
+		}
+
+		-- C#
+		vim.lsp.config.roslyn = {
 			settings = {
 				["csharp|inlay_hints"] = {
 					csharp_enable_inlay_hints_for_implicit_object_creation = true,
@@ -106,20 +108,26 @@ return {
 					dotnet_enable_references_code_lens = true,
 				},
 			},
-		})
-		-- TAILWINDCSS lsp
-		lspconfig.tailwindcss.setup({
-			capabilities = capabilities,
-		})
+		}
 
-		-- Docker lsp
+		-- TailwindCSS
+		vim.lsp.config.tailwindcss = {
+			capabilities = capabilities,
+		}
+
+		-- Enable LSP servers
+		vim.lsp.enable("intelephense")
+		vim.lsp.enable("lua_ls")
+		vim.lsp.enable("astro")
+		vim.lsp.enable("pyright")
+		vim.lsp.enable("roslyn")
+		vim.lsp.enable("tailwindcss")
 		vim.lsp.enable("docker_compose_language_service")
 		vim.lsp.enable("dockerls")
 		vim.lsp.enable("prismals")
 
-		-- Dianostic configuration
+		-- Diagnostic configuration
 		vim.diagnostic.config({
-			-- update_in_insert = true,
 			virtual_text = true,
 			float = {
 				focusable = false,
