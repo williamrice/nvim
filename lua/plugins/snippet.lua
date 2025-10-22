@@ -1,7 +1,7 @@
 return {
 	"L3MON4D3/LuaSnip",
-	tag = "v2.*",
-	run = "make install_jsregexp",
+	version = "v2.*",
+	build = "make install_jsregexp",
 	dependencies = {
 		"saadparwaiz1/cmp_luasnip",
 		"mlaursen/vim-react-snippets",
