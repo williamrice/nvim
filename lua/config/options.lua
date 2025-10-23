@@ -1,7 +1,4 @@
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
---- Setttings
+--- Settings
 local g = vim.g
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
@@ -53,9 +50,3 @@ opt.undofile = true
 opt.updatetime = 250
 opt.timeoutlen = 5000
 opt.inccommand = "split"
-
-vim.api.nvim_create_autocmd("TextYankPost", {
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-})

@@ -8,3 +8,10 @@ vim.api.nvim_create_autocmd("FileType", {
 		end
 	end,
 })
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+	group = vim.api.nvim_create_augroup("warice_highlight_yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+})

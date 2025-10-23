@@ -1,22 +1,42 @@
 return {
 	"nvim-telescope/telescope.nvim",
 	tag = "0.1.8",
-	lazy = false,
-	enable = true,
-	dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim" },
-	opts = {
-		extensions_list = { "ui-select", "remote-sshfs" },
-	},
-	extensions = {
-		["ui-select"] = {
-			require("telescope.themes").get_dropdown({}),
-		},
-		["remote-sshfs"] = {
-			-- e.g., file_ignore_patterns = { ".git/", "node_modules/" },
+	event = "VimEnter",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"nvim-telescope/telescope-ui-select.nvim",
+		{
+			"nvim-telescope/telescope-fzf-native.nvim",
+			build = "make",
+			cond = function()
+				return vim.fn.executable("make") == 1
+			end,
 		},
 	},
-	init = function()
-		require("telescope").load_extension("remote-sshfs")
-		require("telescope").load_extension("ui-select")
+	config = function()
+		local telescope = require("telescope")
+
+		telescope.setup({
+			defaults = {
+				path_display = { "smart" },
+				mappings = {
+					i = {
+						["<C-u>"] = false,
+						["<C-d>"] = false,
+					},
+				},
+			},
+			extensions = {
+				["ui-select"] = {
+					require("telescope.themes").get_dropdown({}),
+				},
+				["remote-sshfs"] = {},
+			},
+		})
+
+		-- Load extensions
+		pcall(telescope.load_extension, "fzf")
+		pcall(telescope.load_extension, "ui-select")
+		pcall(telescope.load_extension, "remote-sshfs")
 	end,
 }

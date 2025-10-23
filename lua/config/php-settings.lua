@@ -1,6 +1,26 @@
 local M = {}
 function M.getPhpSettings()
-	local composer_path = vim.fn.expand("$HOME/.composer/vendor/")
+	-- Detect composer global vendor directory across macOS and Linux
+	-- Try common paths in order: XDG config, .composer, .config/composer
+	local composer_paths = {
+		vim.fn.expand("$HOME/.composer/vendor/"),
+		vim.fn.expand("$HOME/.config/composer/vendor/"),
+	}
+
+	-- Use COMPOSER_HOME env var if set
+	local composer_home = os.getenv("COMPOSER_HOME")
+	if composer_home then
+		table.insert(composer_paths, 1, composer_home .. "/vendor/")
+	end
+
+	-- Filter to only existing paths
+	local include_paths = { "/usr/include/php" }
+	for _, path in ipairs(composer_paths) do
+		if vim.fn.isdirectory(path) == 1 then
+			table.insert(include_paths, path)
+		end
+	end
+
 	return {
 		intelephense = {
 			files = {
@@ -176,10 +196,7 @@ function M.getPhpSettings()
 				"zookeeper",
 			},
 			environment = {
-				includePaths = {
-					"/usr/include/php",
-					composer_path,
-				},
+				includePaths = include_paths,
 			},
 		},
 	}

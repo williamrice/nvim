@@ -15,32 +15,34 @@ return {
 		)
 
 		vim.api.nvim_create_autocmd("LspAttach", {
+			group = vim.api.nvim_create_augroup("warice_lsp_attach", { clear = true }),
 			callback = function(args)
-				local opts = { noremap = true, silent = true }
 				local bufnr = args.buf
-				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gs", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-				vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-				vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-				vim.api.nvim_buf_set_keymap(
-					bufnr,
-					"n",
-					"[d",
-					'<cmd>lua vim.diagnostic.goto_prev({ border = "single" })<CR>',
-					opts
-				)
-				vim.api.nvim_buf_set_keymap(
-					bufnr,
-					"n",
-					"]d",
-					'<cmd>lua vim.diagnostic.goto_next({ border = "single" })<CR>',
-					opts
-				)
-				vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format(nil)' ]])
+				local opts = { buffer = bufnr, noremap = true, silent = true }
+
+				-- Navigation
+				vim.keymap.set("n", "<leader>gs", vim.lsp.buf.declaration, vim.tbl_extend("force", opts, { desc = "Go to declaration" }))
+				vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
+				vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, vim.tbl_extend("force", opts, { desc = "Go to implementation" }))
+				vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, vim.tbl_extend("force", opts, { desc = "Show references" }))
+				vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Hover documentation" }))
+
+				-- Code actions
+				vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "Code action" }))
+				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename symbol" }))
+
+				-- Diagnostics
+				vim.keymap.set("n", "[d", function()
+					vim.diagnostic.jump({ count = -1, float = { border = "single" } })
+				end, vim.tbl_extend("force", opts, { desc = "Previous diagnostic" }))
+				vim.keymap.set("n", "]d", function()
+					vim.diagnostic.jump({ count = 1, float = { border = "single" } })
+				end, vim.tbl_extend("force", opts, { desc = "Next diagnostic" }))
+
+				-- Format command
+				vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
+					vim.lsp.buf.format()
+				end, { desc = "Format buffer with LSP" })
 			end,
 		})
 
@@ -60,6 +62,11 @@ return {
 				"astro",
 				"pyright",
 				"tailwindcss",
+				"docker_compose_language_service",
+				"dockerls",
+				"prismals",
+				"html",
+				"cssls",
 			},
 		})
 

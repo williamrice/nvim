@@ -1,7 +1,4 @@
 local keymap = vim.keymap
-local conform = require("conform")
-local dap = require("dap")
-local dapui = require("dapui")
 
 -- general keymaps
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode." })
@@ -39,31 +36,39 @@ keymap.set("n", "<C-j>", "<C-w>j", { desc = "Navigate to pane below." })
 keymap.set("n", "<C-k>", "<C-w>k", { desc = "Navigate to pane above." })
 keymap.set("n", "<C-l>", "<C-w>l", { desc = "Navigate to right pane." })
 
--- Debugging Keymaps
-keymap.set("n", "<leader>db", dap.toggle_breakpoint)
-keymap.set("n", "<leader>dc", dap.run_to_cursor)
+-- Debugging Keymaps (loaded lazily when DAP is available)
+local dap_ok, dap = pcall(require, "dap")
+if dap_ok then
+	keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
+	keymap.set("n", "<leader>dc", dap.run_to_cursor, { desc = "Run to cursor" })
+	keymap.set("n", "<F1>", dap.continue, { desc = "DAP continue" })
+	keymap.set("n", "<F2>", dap.step_into, { desc = "DAP step into" })
+	keymap.set("n", "<F3>", dap.step_over, { desc = "DAP step over" })
+	keymap.set("n", "<F4>", dap.step_out, { desc = "DAP step out" })
+	keymap.set("n", "<F5>", dap.step_back, { desc = "DAP step back" })
+	keymap.set("n", "<leader>dr", dap.restart, { desc = "DAP restart" })
+end
 
 -- run lua server
 vim.keymap.set("n", "<leader>dl", function()
 	require("osv").launch({ port = 8086 })
-end, { noremap = true })
+end, { noremap = true, desc = "Launch Lua debug server" })
 
 -- Eval var under cursor
 keymap.set("n", "<leader>?", function()
-	--- @diagnostic disable-next-line: missing-fields
-	require("dapui").eval(nil, { enter = true })
-end)
+	local dapui_ok, dapui = pcall(require, "dapui")
+	if dapui_ok then
+		--- @diagnostic disable-next-line: missing-fields
+		dapui.eval(nil, { enter = true })
+	end
+end, { desc = "Evaluate variable under cursor" })
 
 keymap.set("n", "<leader>du", function()
-	dapui.toggle()
-end)
-
-keymap.set("n", "<F1>", dap.continue)
-keymap.set("n", "<F2>", dap.step_into)
-keymap.set("n", "<F3>", dap.step_over)
-keymap.set("n", "<F4>", dap.step_out)
-keymap.set("n", "<F5>", dap.step_back)
-keymap.set("n", "<leader>dr", dap.restart)
+	local dapui_ok, dapui = pcall(require, "dapui")
+	if dapui_ok then
+		dapui.toggle()
+	end
+end, { desc = "Toggle DAP UI" })
 
 -- Plugin Keybinds
 ----------------------
@@ -89,11 +94,14 @@ keymap.set("n", "<leader>ge", vim.diagnostic.open_float, { desc = "Show line dia
 
 -- conform formatter
 keymap.set({ "n", "v" }, "<leader>f", function()
-	conform.format({
-		lsp_fallback = true,
-		async = false,
-		timeout_ms = 1000,
-	})
+	local conform_ok, conform = pcall(require, "conform")
+	if conform_ok then
+		conform.format({
+			lsp_fallback = true,
+			async = false,
+			timeout_ms = 1000,
+		})
+	end
 end, { desc = "Format file or range (in visual mode)." })
 
 -- trouble

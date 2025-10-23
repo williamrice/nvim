@@ -2,8 +2,7 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		enabled = true,
-		lazy = false,
+		event = "VeryLazy",
 		opts = {
 			sections = {
 				lualine_c = {
