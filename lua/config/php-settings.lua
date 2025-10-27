@@ -30,6 +30,7 @@ function M.getPhpSettings()
 				"amqp",
 				"apache",
 				"apcu",
+				"acf-pro",
 				"bcmath",
 				"blackfire",
 				"bz2",
