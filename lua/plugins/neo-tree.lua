@@ -1,7 +1,7 @@
 return {
 	"nvim-neo-tree/neo-tree.nvim",
 	branch = "v3.x",
-	cmd = "Neotree",
+	lazy = false,
 	keys = {
 		{ "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle file explorer" },
 	},
@@ -13,6 +13,8 @@ return {
 	},
 	opts = {
 		filesystem = {
+			bind_to_cwd = true,
+			hijack_netrw_behavior = "open_default",
 			filtered_items = {
 				visible = true,
 				show_hidden_count = true,
