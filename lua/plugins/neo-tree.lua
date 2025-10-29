@@ -15,6 +15,7 @@ return {
 		filesystem = {
 			bind_to_cwd = true,
 			hijack_netrw_behavior = "open_default",
+			auto_expand_width = true,
 			filtered_items = {
 				visible = true,
 				show_hidden_count = true,
