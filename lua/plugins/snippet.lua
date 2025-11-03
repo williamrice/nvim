@@ -4,7 +4,7 @@ return {
 	build = "make install_jsregexp",
 	dependencies = {
 		"saadparwaiz1/cmp_luasnip",
-		"mlaursen/vim-react-snippets",
+		{ "mlaursen/vim-react-snippets", opts = { readonly_props = false } },
 		"rafamadriz/friendly-snippets",
 	},
 	config = function()
@@ -15,7 +15,6 @@ return {
 
 		require("luasnip.loaders.from_vscode").lazy_load()
 		require("luasnip.loaders.from_lua").load({ paths = { vim.fn.stdpath("config") .. "/lua/config/snippets" } })
-		require("vim-react-snippets").lazy_load()
 
 		require("luasnip").filetype_extend("javascript", { "react" })
 		require("luasnip").filetype_extend("typescript", { "react" })
