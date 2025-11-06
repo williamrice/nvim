@@ -109,7 +109,7 @@ return {
 			"prismals",
 			"html",
 			"cssls",
-			"csharp_language_server",
+			"roslyn",
 		}
 
 		-- Auto-install servers if not already installed
@@ -133,7 +133,7 @@ return {
 		vim.lsp.enable("dockerls")
 		vim.lsp.enable("prismals")
 		vim.lsp.enable("html")
-		vim.lsp.enable("csharp_language_server")
+		vim.lsp.enable("roslyn")
 
 		-- Diagnostic configuration
 		vim.diagnostic.config({
