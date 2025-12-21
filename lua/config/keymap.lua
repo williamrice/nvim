@@ -75,6 +75,8 @@ end, { desc = "Toggle DAP UI" })
 -- Code copy
 keymap.set("n", "<leader>cr", "<CMD>Lazy reload codecopy.nvim<CR>", { desc = "reload code copy" })
 keymap.set("n", "<leader>cc", "<CMD>CodeCopy<CR>", { desc = "copy code" })
+
+-- copilot
 keymap.set({ "i", "n" }, "<C-Bslash>", function()
 	if vim.b.copilot_enabled == nil then
 		vim.b.copilot_enabled = true
@@ -135,9 +137,6 @@ keymap.set("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR
 keymap.set("n", "<leader>sp", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
 	desc = "Search on current file",
 })
-
--- vim-maximizer
-keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>", { desc = "Toggle split window maximization." })
 
 -- nvim-tree
 keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "Toggle file explorer." })
