@@ -15,7 +15,22 @@ return {
 			local dap = require("dap")
 			local ui = require("dapui")
 
-			require("dapui").setup()
+			require("dapui").setup({
+				layouts = {
+					{
+						elements = {
+							{ id = "scopes", size = 0.5 },
+							{ id = "repl", size = 0.5 },
+						},
+						position = "bottom",
+						size = 10,
+					},
+				},
+				controls = {
+					enabled = true,
+					element = "repl",
+				},
+			})
 			require("dap-cs").setup()
 
 			--- @diagnostic disable-next-line: missing-fields

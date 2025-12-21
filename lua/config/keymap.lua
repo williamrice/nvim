@@ -39,14 +39,14 @@ keymap.set("n", "<C-l>", "<C-w>l", { desc = "Navigate to right pane." })
 -- Debugging Keymaps (loaded lazily when DAP is available)
 local dap_ok, dap = pcall(require, "dap")
 if dap_ok then
+	keymap.set("n", "<F5>", dap.continue, { desc = "DAP continue / start debugging" })
+	keymap.set("n", "<F10>", dap.step_over, { desc = "DAP step over" })
+	keymap.set("n", "<F11>", dap.step_into, { desc = "DAP step into" })
+	keymap.set("n", "<F12>", dap.step_out, { desc = "DAP step out" })
 	keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
-	keymap.set("n", "<leader>dc", dap.run_to_cursor, { desc = "Run to cursor" })
-	keymap.set("n", "<F1>", dap.continue, { desc = "DAP continue" })
-	keymap.set("n", "<F2>", dap.step_into, { desc = "DAP step into" })
-	keymap.set("n", "<F3>", dap.step_over, { desc = "DAP step over" })
-	keymap.set("n", "<F4>", dap.step_out, { desc = "DAP step out" })
-	keymap.set("n", "<F5>", dap.step_back, { desc = "DAP step back" })
+	keymap.set("n", "<leader>dt", dap.terminate, { desc = "DAP terminate / stop debugging" })
 	keymap.set("n", "<leader>dr", dap.restart, { desc = "DAP restart" })
+	keymap.set("n", "<leader>dc", dap.run_to_cursor, { desc = "Run to cursor" })
 end
 
 -- run lua server
