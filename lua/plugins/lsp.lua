@@ -110,6 +110,7 @@ return {
 			"html",
 			"cssls",
 			"roslyn",
+			"bashls",
 		}
 
 		-- Auto-install servers if not already installed
@@ -133,7 +134,7 @@ return {
 		vim.lsp.enable("dockerls")
 		vim.lsp.enable("prismals")
 		vim.lsp.enable("html")
-		vim.lsp.enable("roslyn")
+		vim.lsp.enable("bashls")
 
 		-- Diagnostic configuration
 		vim.diagnostic.config({
