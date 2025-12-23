@@ -161,8 +161,21 @@ local fuzzy_search = function()
 end
 vim.keymap.set("n", "<leader>fg", fuzzy_search, { desc = "Telescope fuzzy Grep" })
 
--- telescope git commands
+-- git commands
 keymap.set("n", "<leader>gb", "<cmd>GitBlameToggle<cr>", { desc = "Toggle Git blame view." })
+
+-- diffview
+keymap.set("n", "<leader>gv", "<cmd>DiffviewOpen<cr>", { desc = "Open Git diff view." })
+keymap.set("n", "<leader>gh", "<cmd>DiffviewFileHistory<cr>", { desc = "Open Git history for all files." })
+keymap.set("n", "<leader>gf", "<cmd>DiffviewFileHistory %<cr>", { desc = "Open Git history for current file." })
+keymap.set("n", "<leader>gc", function()
+	vim.ui.input({ prompt = "Compare branch/commit: " }, function(input)
+		if input then
+			vim.cmd("DiffviewOpen " .. input)
+		end
+	end)
+end, { desc = "Compare Git branches/commits." })
+keymap.set("n", "<leader>gx", "<cmd>DiffviewClose<cr>", { desc = "Close Git diff view." })
 
 -- bufferline
 keymap.set("n", "<leader>q", "<cmd>bp|bd #<CR>", { desc = "Close current buffer." })
