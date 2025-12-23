@@ -23,6 +23,7 @@ return {
 			group = vim.api.nvim_create_augroup("warice_lsp_attach", { clear = true }),
 			callback = function(args)
 				local bufnr = args.buf
+				local client = vim.lsp.get_client_by_id(args.data.client_id)
 				local opts = { buffer = bufnr, noremap = true, silent = true }
 
 				-- Navigation
@@ -83,6 +84,11 @@ return {
 				vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
 					vim.lsp.buf.format()
 				end, { desc = "Format buffer with LSP" })
+
+				-- Enable inlay hints if supported
+				if client and client.server_capabilities.inlayHintProvider then
+					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+				end
 			end,
 		})
 

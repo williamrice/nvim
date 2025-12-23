@@ -5,6 +5,14 @@ return {
 			diagnostics = {
 				globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
 			},
+			hint = {
+				enable = true,
+				setType = true,
+				paramType = true,
+				paramName = "All", -- "All" | "Literal" | "Disable"
+				semicolon = "Disable",
+				arrayIndex = "Disable",
+			},
 		},
 	},
 }

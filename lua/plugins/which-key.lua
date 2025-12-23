@@ -24,6 +24,7 @@ return {
 			{ "<leader>d", group = "Debug (DAP)" },
 			{ "<leader>c", group = "Code/Copilot" },
 			{ "<leader>w", group = "Which-key" },
+			{ "<leader>m", group = "Markdown" },
 		},
 	},
 }

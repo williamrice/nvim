@@ -26,6 +26,19 @@ function M.getPhpSettings()
 			files = {
 				maxSize = 10000000,
 			},
+			-- Inlay hints configuration
+			inlayHints = {
+				parameterNames = {
+					enabled = "all", -- "none" | "literals" | "all"
+					suppressWhenArgumentMatchesName = true,
+				},
+				typeHints = {
+					enabled = true,
+				},
+				functionReturnTypes = {
+					enabled = true,
+				},
+			},
 			stubs = {
 				"amqp",
 				"apache",

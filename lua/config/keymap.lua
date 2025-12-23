@@ -100,6 +100,13 @@ keymap.set(
 	{ desc = "Go to source definition in TypeScript file." }
 )
 keymap.set("n", "<leader>ge", vim.diagnostic.open_float, { desc = "Show line diagnostics." })
+keymap.set("n", "<leader>gH", function()
+	local bufnr = vim.api.nvim_get_current_buf()
+	local current_state = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+	vim.lsp.inlay_hint.enable(not current_state, { bufnr = bufnr })
+	local status = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }) and "enabled" or "disabled"
+	vim.notify("Inlay hints " .. status, vim.log.levels.INFO)
+end, { desc = "Toggle inlay Hints." })
 
 -- conform formatter
 keymap.set({ "n", "v" }, "<leader>f", function()
@@ -144,6 +151,10 @@ keymap.set("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR
 keymap.set("n", "<leader>sp", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
 	desc = "Search on current file",
 })
+
+-- markdown
+keymap.set("n", "<leader>md", "<cmd>RenderMarkdown toggle<cr>", { desc = "Toggle markdown rendering." })
+keymap.set("n", "<leader>mp", "<cmd>RenderMarkdown preview<cr>", { desc = "Preview markdown in split." })
 
 -- nvim-tree
 keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "Toggle file explorer." })
