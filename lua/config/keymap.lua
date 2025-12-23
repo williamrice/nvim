@@ -1,5 +1,4 @@
 local keymap = vim.keymap
-
 -- general keymaps
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode." })
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights." })
@@ -77,13 +76,21 @@ keymap.set("n", "<leader>cr", "<CMD>Lazy reload codecopy.nvim<CR>", { desc = "re
 keymap.set("n", "<leader>cc", "<CMD>CodeCopy<CR>", { desc = "copy code" })
 
 -- copilot
-keymap.set({ "i", "n" }, "<C-Bslash>", function()
+keymap.set("n", "<leader>ct", function()
 	if vim.b.copilot_enabled == nil then
 		vim.b.copilot_enabled = true
 	end
 	vim.b.copilot_enabled = not vim.b.copilot_enabled
-	vim.print("Copilot enabled: " .. tostring(vim.b.copilot_enabled))
-end, { desc = "Toggle co-pilot." })
+	if vim.b.copilot_enabled then
+		vim.cmd("Copilot enable")
+		vim.notify("Copilot enabled", vim.log.levels.INFO)
+	else
+		vim.cmd("Copilot disable")
+		vim.notify("Copilot disabled", vim.log.levels.INFO)
+	end
+end, { desc = "Toggle Copilot." })
+keymap.set("n", "<leader>cp", "<cmd>Copilot panel<cr>", { desc = "Open Copilot panel." })
+keymap.set("n", "<leader>cs", "<cmd>Copilot status<cr>", { desc = "Show Copilot status." })
 
 -- lsp
 keymap.set(
