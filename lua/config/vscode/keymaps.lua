@@ -1,5 +1,4 @@
 -- VSCode-specific keymaps using VSCode API
--- These replicate the native keymaps but use VSCode actions
 
 local vscode = require("vscode")
 local keymap = vim.keymap
@@ -12,20 +11,10 @@ local keymap = vim.keymap
 -- Note: x -> "_x is in shared (works in both)
 -- Note: Visual mode >, < indentation is in shared (works in both)
 
--- Save without formatting
-keymap.set("n", "<leader>sf", function()
-	vscode.action("workbench.action.files.save")
-end, { desc = "Saves the buffer without formatting." })
-
 -- Double escape to close sidebar
 keymap.set("n", "<Esc><Esc>", function()
 	vscode.action("workbench.action.closeSidebar")
 end, { desc = "Close primary sidebar." })
-
--- Note: <C-d>, <C-u> scroll with center should work in shared
--- Note: n, N search with center should work in shared
-
--- Source file not needed in VSCode (removed <leader><leader>)
 
 -- ===========================================================================
 -- Window/Split Management (VSCode Editor Groups)
@@ -186,10 +175,14 @@ end, { desc = "Next diagnostic." })
 -- Formatting
 -- ============================================================================
 
-keymap.set({ "n", "v" }, "<leader>f", function()
+keymap.set("n", "<leader>f", function()
 	vscode.action("editor.action.formatDocument")
 end, { desc = "Format file or range (in visual mode)." })
 
+keymap.set("v", "<leader>f", function()
+	vscode.action("editor.action.formatSelection")
+	vim.cmd('normal! \x1b')
+end, { desc = "Format file or range (in visual mode)." })
 -- ============================================================================
 -- Trouble (Diagnostics/Problems in VSCode)
 -- ============================================================================
