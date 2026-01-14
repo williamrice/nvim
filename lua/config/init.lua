@@ -6,7 +6,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	if vim.v.shell_error ~= 0 then
 		vim.api.nvim_echo({
 			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-			{ out, "WarningMsg" },
+			{ out,                            "WarningMsg" },
 			{ "\nPress any key to exit..." },
 		}, true, {})
 		vim.fn.getchar()
@@ -15,15 +15,42 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local vs_code = vim.g.vscode ~= nil and vim.g.vscode == 1
+print("VS Code variable:", vim.g.vscode)
+print("Running in VS Code:", vs_code)
+
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
-require("config.options")
+
+-- Load shared options first (work in both environments)
+require("config.shared.options")
+
+-- Load environment-specific options
+if vs_code then
+	require("config.vscode.options")
+else
+	require("config.native.options")
+end
+
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
 		-- import your plugins
-		{ import = "plugins" },
+		-- { import = "plugins" },
+		{
+			import = "plugins_native",
+			cond = function()
+				return not vs_code
+			end
+		},
+		{ import = "plugins_shared", cond = true },
+		{
+			import = "plugins_vscode",
+			cond = function()
+				return vim.g.vscode
+			end
+		},
 	},
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.
@@ -31,5 +58,15 @@ require("lazy").setup({
 	-- automatically check for plugin updates
 	checker = { enabled = true },
 })
-require("config.keymap")
-require("config.autocmds")
+
+-- Load shared keymaps and autocmds
+require("config.shared.keymaps")
+require("config.shared.autocmds")
+
+-- Load environment-specific keymaps and autocmds
+if vs_code then
+	require("config.vscode.keymaps")
+else
+	require("config.native.keymaps")
+	require("config.native.autocmds")
+end

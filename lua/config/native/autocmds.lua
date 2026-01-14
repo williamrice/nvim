@@ -1,3 +1,5 @@
+-- Native-only autocmds (shared autocmds are in config/shared/autocmds.lua)
+
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("warice_help_resize", { clear = true }),
 	pattern = "help",
@@ -6,12 +8,5 @@ vim.api.nvim_create_autocmd("FileType", {
 			vim.cmd("wincmd L")
 			vim.cmd("vertical resize 80")
 		end
-	end,
-})
-
-vim.api.nvim_create_autocmd("TextYankPost", {
-	group = vim.api.nvim_create_augroup("warice_highlight_yank", { clear = true }),
-	callback = function()
-		vim.hl.on_yank()
 	end,
 })

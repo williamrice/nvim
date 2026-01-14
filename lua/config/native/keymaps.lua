@@ -1,18 +1,13 @@
 local keymap = vim.keymap
--- general keymaps
+
+-- Native-only general keymaps (shared keymaps are in config/shared/keymaps.lua)
+
+-- Exit insert mode with jk (VSCode uses compositeKeys in settings.json)
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode." })
+
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights." })
 keymap.set("n", "<leader>sf", ":noa w<CR>", { desc = "Saves the buffer without formatting." })
-keymap.set("n", "x", '"_x', { desc = "Delete character under cursor without affecting clipboard." })
-keymap.set("n", "<leader>=", "<C-a>", { desc = "Increment number under cursor." })
-keymap.set("n", "<leader>-", "<C-x>", { desc = "Decrement number under cursor." })
-keymap.set("v", ">", ">gv", { desc = "Increase indentation." })
-keymap.set("v", "<", "<gv", { desc = "Decrease indentation." })
 keymap.set("n", "<C-g>", "ggVG", { desc = "Select all text in buffer." })
-keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and center cursor." })
-keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center cursor." })
-keymap.set("n", "n", "nzzzv", { desc = "Next search result and center cursor." })
-keymap.set("n", "N", "Nzzzv", { desc = "Previous search result and center cursor." })
 keymap.set("n", "<leader><leader>", function()
 	vim.cmd("so")
 	print("Sourced the current file.")
