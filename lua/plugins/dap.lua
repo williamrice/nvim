@@ -10,28 +10,15 @@ return {
 			"jbyuki/one-small-step-for-vimkind",
 			"nicholasmata/nvim-dap-cs",
 			"jay-babu/mason-nvim-dap.nvim",
+			"Cliffback/netcoredbg-macOS-arm64.nvim",
 		},
 		config = function()
 			local dap = require("dap")
 			local ui = require("dapui")
 
-			require("dapui").setup({
-				layouts = {
-					{
-						elements = {
-							{ id = "scopes", size = 0.5 },
-							{ id = "repl", size = 0.5 },
-						},
-						position = "bottom",
-						size = 10,
-					},
-				},
-				controls = {
-					enabled = true,
-					element = "repl",
-				},
-			})
+			require("dapui").setup()
 			require("dap-cs").setup()
+			require("netcoredbg-macOS-arm64").setup(dap)
 
 			--- @diagnostic disable-next-line: missing-fields
 			require("nvim-dap-virtual-text").setup({
