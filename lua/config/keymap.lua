@@ -157,7 +157,7 @@ keymap.set("n", "<leader>md", "<cmd>RenderMarkdown toggle<cr>", { desc = "Toggle
 keymap.set("n", "<leader>mp", "<cmd>RenderMarkdown preview<cr>", { desc = "Preview markdown in split." })
 
 -- nvim-tree
-keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "Toggle file explorer." })
+keymap.set("n", "<leader>e", "<cmd>Neotree toggle reveal<CR>", { desc = "Toggle file explorer." })
 
 -- telescope
 keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files in current directory." })
