@@ -18,6 +18,7 @@ return {
 
 			require("dapui").setup()
 			require("dap-cs").setup()
+			---@diagnostic disable-next-line: redundant-parameter
 			require("netcoredbg-macOS-arm64").setup(dap)
 
 			--- @diagnostic disable-next-line: missing-fields
