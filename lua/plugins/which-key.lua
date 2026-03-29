@@ -15,7 +15,7 @@ return {
 		delay = 500,
 		spec = {
 			-- Group definitions
-			{ "<leader>f", group = "Find (Telescope)" },
+			{ "<leader>f", group = "Find" },
 			{ "<leader>g", group = "Git/LSP navigation" },
 			{ "<leader>n", group = "NPM package info" },
 			{ "<leader>s", group = "Split/Search/Save" },
