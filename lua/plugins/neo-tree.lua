@@ -14,7 +14,7 @@ return {
 	opts = {
 		filesystem = {
 			bind_to_cwd = true,
-			hijack_netrw_behavior = "open_default",
+			hijack_netrw_behavior = "disabled",
 			auto_expand_width = true,
 			filtered_items = {
 				visible = true,
