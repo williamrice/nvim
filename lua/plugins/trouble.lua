@@ -3,6 +3,20 @@ return {
 	lazy = false,
 	opts = {
 		auto_close = true,
-	}, -- for default options, refer to the configuration section for custom setup.
+	},
 	cmd = "Trouble",
+	config = function()
+		-- Diagnostic configuration
+		vim.diagnostic.config({
+			virtual_text = true,
+			float = {
+				focusable = false,
+				style = "minimal",
+				border = "rounded",
+				source = "if_many",
+				header = "",
+				prefix = "",
+			},
+		})
+	end,
 }

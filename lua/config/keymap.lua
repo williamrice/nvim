@@ -110,6 +110,24 @@ keymap.set("n", "<leader>gH", function()
 	vim.notify("Inlay hints " .. status, vim.log.levels.INFO)
 end, { desc = "Toggle inlay Hints." })
 
+keymap.set("n", "<leader>gs", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
+keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "Show references" })
+keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover documentation" })
+
+-- Code actions
+keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
+keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
+
+-- Diagnostics
+keymap.set("n", "[d", function()
+	vim.diagnostic.jump({ count = -1, float = { border = "single" } })
+end, { desc = "Previous diagnostic" })
+keymap.set("n", "]d", function()
+	vim.diagnostic.jump({ count = 1, float = { border = "single" } })
+end, { desc = "Next diagnostic" })
+
 -- conform formatter
 keymap.set({ "n", "v" }, "<leader>f", function()
 	local conform_ok, conform = pcall(require, "conform")

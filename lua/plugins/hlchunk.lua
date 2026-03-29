@@ -18,7 +18,7 @@ return {
 			},
 		},
 		line_num = {
-			enable = false,
+			enable = true,
 			style = "#0AB7FF",
 		},
 		blank = {
