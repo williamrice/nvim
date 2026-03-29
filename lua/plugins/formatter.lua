@@ -14,6 +14,7 @@ return {
 			css = { "prettier" },
 			scss = { "prettier" },
 			json = { "prettier" },
+			jsonc = { "prettier" },
 			yaml = { "prettier" },
 			markdown = { "prettier" },
 			lua = { "stylua" },
