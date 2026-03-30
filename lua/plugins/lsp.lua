@@ -22,27 +22,30 @@ return {
 		-- List of LSP servers to ensure are installed via Mason
 		require("mason-lspconfig").setup({
 			ensure_installed = {
-				"lua_ls",
-				"intelephense",
 				"astro",
-				"pyright",
-				"tailwindcss",
+				"bashls",
+				"cssls",
 				"docker_compose_language_service",
 				"dockerls",
-				"prismals",
 				"html",
-				"cssls",
-				"bashls",
+				"intelephense",
+				"laravel_ls",
+				"lua_ls",
+				"prismals",
+				"pyright",
+				"tailwindcss",
 			},
 			automatic_enabled = true,
 		})
 
 		require("mason-tool-installer").setup({
 			ensure_installed = {
-				"stylua",
-				"prettier",
 				"black",
+				"blade-formatter",
+				"php-cs-fixer",
+				"prettier",
 				"ruff",
+				"stylua",
 			},
 		})
 	end,

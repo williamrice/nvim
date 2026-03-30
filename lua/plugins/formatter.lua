@@ -20,6 +20,8 @@ return {
 			lua = { "stylua" },
 			python = { "isort", "black" },
 			-- php uses LSP (intelephense) formatting via lsp_fallback
+			blade = { "blade-formatter" },
+			php = { "php_cs_fixer" },
 			sh = { "shfmt" },
 		},
 		format_on_save = {
