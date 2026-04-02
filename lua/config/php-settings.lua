@@ -142,6 +142,7 @@ function M.getPhpSettings()
 				"pspell",
 				"pthreads",
 				"radius",
+				"random",
 				"rar",
 				"rdkafka",
 				"readline",

@@ -46,6 +46,7 @@ return {
 				"prettier",
 				"ruff",
 				"stylua",
+				"twig-cs-fixer",
 			},
 		})
 	end,
