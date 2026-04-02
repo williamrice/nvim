@@ -117,14 +117,29 @@ keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "Show references"
 keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover documentation" })
 
 -- Code actions
-keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
+keymap.set({ "n", "v" }, "<leader>ca", function()
+	require("fzf-lua").lsp_code_actions({
+		winopts = {
+			-- relative = "cursor",
+			width = 0.8,
+			height = 0.5,
+			row = 0.5,
+			col = 0.5,
+			---@diagnostic disable-next-line: missing-fields
+			preview = {
+				layout = "horizontal",
+				horizontal = "right:70%",
+			},
+		},
+	})
+end, { desc = "Code action" })
 keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
 
 -- Diagnostics
-keymap.set("n", "[d", function()
+keymap.set("n", "<leader>ne", function()
 	vim.diagnostic.jump({ count = -1, float = { border = "single" } })
 end, { desc = "Previous diagnostic" })
-keymap.set("n", "]d", function()
+keymap.set("n", "<leader>pe", function()
 	vim.diagnostic.jump({ count = 1, float = { border = "single" } })
 end, { desc = "Next diagnostic" })
 
