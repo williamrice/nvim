@@ -29,7 +29,6 @@ return {
 				"dockerls",
 				"html",
 				"intelephense",
-				"laravel_ls",
 				"lua_ls",
 				"prismals",
 				"pyright",
