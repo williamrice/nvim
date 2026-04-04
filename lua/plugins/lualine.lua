@@ -51,7 +51,6 @@ return {
 
 			-- Custom component to show active linters
 			local function linters()
-				-- Since you're using LSP for diagnostics, we can show diagnostic sources
 				local diagnostics = vim.diagnostic.get(0)
 				local sources = {}
 				local seen = {}
@@ -112,8 +111,6 @@ return {
 								return linters() ~= ""
 							end,
 						},
-						"encoding",
-						"fileformat",
 						"filetype",
 					},
 				},

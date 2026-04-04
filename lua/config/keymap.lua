@@ -1,4 +1,6 @@
 local keymap = vim.keymap
+local fzf = require("fzf-lua")
+
 -- general keymaps
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode." })
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights." })
@@ -108,6 +110,39 @@ keymap.set("n", "<leader>gH", function()
 	vim.notify("Inlay hints " .. status, vim.log.levels.INFO)
 end, { desc = "Toggle inlay Hints." })
 
+keymap.set("n", "<leader>gs", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
+keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "Show references" })
+keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover documentation" })
+
+-- Code actions
+keymap.set({ "n", "v" }, "<leader>ca", function()
+	require("fzf-lua").lsp_code_actions({
+		winopts = {
+			-- relative = "cursor",
+			width = 0.8,
+			height = 0.5,
+			row = 0.5,
+			col = 0.5,
+			---@diagnostic disable-next-line: missing-fields
+			preview = {
+				layout = "horizontal",
+				horizontal = "right:70%",
+			},
+		},
+	})
+end, { desc = "Code action" })
+keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
+
+-- Diagnostics
+keymap.set("n", "<leader>ne", function()
+	vim.diagnostic.jump({ count = -1, float = { border = "single" } })
+end, { desc = "Previous diagnostic" })
+keymap.set("n", "<leader>pe", function()
+	vim.diagnostic.jump({ count = 1, float = { border = "single" } })
+end, { desc = "Next diagnostic" })
+
 -- conform formatter
 keymap.set({ "n", "v" }, "<leader>f", function()
 	local conform_ok, conform = pcall(require, "conform")
@@ -159,25 +194,14 @@ keymap.set("n", "<leader>mp", "<cmd>RenderMarkdown preview<cr>", { desc = "Previ
 -- nvim-tree
 keymap.set("n", "<leader>e", "<cmd>Neotree toggle reveal<CR>", { desc = "Toggle file explorer." })
 
--- telescope
-keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files in current directory." })
-keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Search string in current directory." })
-keymap.set("n", "<leader>fb", "<cmd>Telescope grep_string<cr>", { desc = "Search string under cursor." })
+keymap.set("n", "<leader>ff", fzf.files, { desc = "Find files in current directory." })
+keymap.set("n", "<leader>fs", fzf.live_grep, { desc = "Search string in current directory." })
+keymap.set("n", "<leader>fb", fzf.grep_cword, { desc = "Search string under cursor." })
 keymap.set("n", "<leader>fc", function()
-	require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") })
+	fzf.files({ cwd = "~/.config/nvim" })
 end, { desc = "List Neovim config files." })
-keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "List recently opened files." })
-keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "List available help tags." })
-keymap.set("n", "<leader>km", "<cmd>Telescope keymaps<cr>", { desc = "List keymappings." })
-local fuzzy_search = function()
-	require("telescope.builtin").grep_string({
-		shorten_path = true,
-		word_match = "-w",
-		only_sort_text = true,
-		search = "",
-	})
-end
-vim.keymap.set("n", "<leader>fg", fuzzy_search, { desc = "Telescope fuzzy Grep" })
+keymap.set("n", "<leader>fr", fzf.oldfiles, { desc = "List recently opened files." })
+keymap.set("n", "<leader>fh", fzf.help_tags, { desc = "List available help tags." })
 
 -- git commands
 keymap.set("n", "<leader>gb", "<cmd>GitBlameToggle<cr>", { desc = "Toggle Git blame view." })

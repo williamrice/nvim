@@ -4,28 +4,27 @@ return {
 	dependencies = {
 		{
 			"nvim-treesitter/nvim-treesitter-textobjects",
-			branch = "main"
-		}
+			branch = "main",
+		},
 	},
 	event = { "BufReadPre", "BufNewFile" },
 	opts = {
 		ensure_installed = {
-			"astro",
 			"bash",
+			"blade",
 			"c_sharp",
 			"c",
 			"lua",
 			"vim",
 			"vimdoc",
 			"query",
-			"elixir",
-			"heex",
 			"javascript",
 			"html",
 			"css",
 			"tsx",
 			"json",
 			"php",
+			"php_only",
 			"typescript",
 			"markdown",
 			"markdown_inline",
@@ -64,5 +63,20 @@ return {
 				},
 			},
 		},
-	}
+	},
+	config = function(_, opts)
+		local parsers = require("nvim-treesitter.parsers")
+
+		parsers.blade = {
+			---@diagnostic disable-next-line: missing-fields
+			install_info = {
+				url = "https://github.com/EmranMR/tree-sitter-blade",
+				files = { "src/parser.c" },
+				branch = "main",
+			},
+			filetype = "blade",
+			tier = 3,
+		}
+		-- print(vim.inspect(parsers))
+	end,
 }
