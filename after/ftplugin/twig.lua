@@ -1,4 +1,4 @@
 vim.treesitter.start()
 vim.bo.autoindent = true
 vim.bo.smartindent = true
-vim.bo.indentexpr = "nvim_treesitter#indent()"
+vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
