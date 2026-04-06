@@ -1,9 +1,12 @@
-return {
-	"akinsho/bufferline.nvim",
-	version = "*",
-	event = "VeryLazy",
-	dependencies = "nvim-tree/nvim-web-devicons",
-	opts = {
+local gh = require("config.utils").gh
+
+vim.pack.add({
+	gh("akinsho/bufferline.nvim"),
+})
+
+local ok, bufferline = pcall(require, "bufferline")
+if ok then
+	bufferline.setup({
 		highlights = {
 			fill = { bg = "#000000" },
 			buffer_selected = { bold = true },
@@ -39,5 +42,5 @@ return {
 				return ""
 			end,
 		},
-	},
-}
+	})
+end

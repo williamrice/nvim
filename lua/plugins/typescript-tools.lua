@@ -1,7 +1,14 @@
-return {
-	"pmizio/typescript-tools.nvim",
-	dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-	opts = {
+local gh = require("config.utils").gh
+
+vim.pack.add({
+	gh("pmizio/typescript-tools.nvim"),
+	gh("nvim-lua/plenary.nvim"),
+})
+
+local ok, typescript_tools = pcall(require, "typescript-tools")
+
+if ok then
+	typescript_tools.setup({
 		settings = {
 			-- Expose as global settings
 			expose_as_code_action = "all",
@@ -18,12 +25,5 @@ return {
 				includeInlayEnumMemberValueHints = true,
 			},
 		},
-	},
-	ft = {
-		"typescript",
-		"javascript",
-		"javascriptreact",
-		"typescriptreact",
-		"svelte",
-	},
-}
+	})
+end

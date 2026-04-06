@@ -1,16 +1,13 @@
-return {
-	"folke/which-key.nvim",
-	event = "VeryLazy",
-	keys = {
-		{
-			"<leader>wk",
-			function()
-				require("which-key").show({ global = false })
-			end,
-			desc = "Show buffer-local keymaps (which-key)",
-		},
-	},
-	opts = {
+local gh = require("config.utils").gh
+
+vim.pack.add({
+	gh("folke/which-key.nvim"),
+})
+
+local ok, wk = pcall(require, "which-key")
+
+if ok then
+	wk.setup({
 		preset = "modern",
 		delay = 500,
 		spec = {
@@ -26,5 +23,5 @@ return {
 			{ "<leader>w", group = "Which-key" },
 			{ "<leader>m", group = "Markdown" },
 		},
-	},
-}
+	})
+end

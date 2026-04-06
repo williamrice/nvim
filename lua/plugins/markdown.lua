@@ -1,11 +1,14 @@
-return {
-	"MeanderingProgrammer/render-markdown.nvim",
-	dependencies = {
-		"nvim-treesitter/nvim-treesitter",
-		"nvim-tree/nvim-web-devicons",
-	},
-	ft = "markdown", -- Only load for markdown files
-	opts = {
+local gh = require("config.utils").gh
+
+vim.pack.add({
+	gh("MeanderingProgrammer/render-markdown.nvim"),
+	gh("nvim-tree/nvim-web-devicons"),
+})
+
+local ok, render_markdown = pcall(require, "render-markdown")
+
+if ok then
+	render_markdown.setup({
 		-- Render markdown when opening file
 		enabled = true,
 		-- Max file size to render (100KB default)
@@ -44,5 +47,5 @@ return {
 			enabled = true,
 			icons = { "●", "○", "◆", "◇" },
 		},
-	},
-}
+	})
+end

@@ -1,9 +1,13 @@
-return {
-	"stevearc/conform.nvim",
-	enabled = true,
-	lazy = true,
-	event = { "BufReadPre", "BufNewFile" },
-	opts = {
+local gh = require("config.utils").gh
+
+vim.pack.add({
+	gh("stevearc/conform.nvim"),
+})
+
+local ok, conform = pcall(require, "conform")
+
+if ok then
+	conform.setup({
 		formatters_by_ft = {
 			javascript = { "prettier" },
 			typescript = { "prettier" },
@@ -19,7 +23,6 @@ return {
 			markdown = { "prettier" },
 			lua = { "stylua" },
 			python = { "isort", "black" },
-			-- php uses LSP (intelephense) formatting via lsp_fallback
 			blade = { "blade-formatter" },
 			php = { "php_cs_fixer" },
 			sh = { "shfmt" },
@@ -29,5 +32,5 @@ return {
 			async = false,
 			timeout_ms = 1000,
 		},
-	},
-}
+	})
+end
