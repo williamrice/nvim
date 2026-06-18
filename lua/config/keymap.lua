@@ -28,8 +28,6 @@ keymap.set("n", "<leader>sx", ":close<CR>", { desc = "Close current window." })
 
 keymap.set("n", "<leader>to", ":tabnew<CR>", { desc = "Open new tab." })
 keymap.set("n", "<leader>tx", ":tabclose<CR>", { desc = "Close current tab." })
-keymap.set("n", "<leader>tn", ":tabn<CR>", { desc = "Go to next tab." })
-keymap.set("n", "<leader>tp", ":tabp<CR>", { desc = "Go to previous tab." })
 
 -- Pane swaps
 keymap.set("n", "<C-h>", "<C-w>h", { desc = "Navigate to left pane." })
@@ -101,8 +99,8 @@ keymap.set(
 	"<cmd>TSToolsGoToSourceDefinition<cr>",
 	{ desc = "Go to source definition in TypeScript file." }
 )
-keymap.set("n", "<leader>ge", vim.diagnostic.open_float, { desc = "Show line diagnostics." })
-keymap.set("n", "<leader>gH", function()
+keymap.set("n", "ge", vim.diagnostic.open_float, { desc = "Show line diagnostics." })
+keymap.set("n", "gH", function()
 	local bufnr = vim.api.nvim_get_current_buf()
 	local current_state = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
 	vim.lsp.inlay_hint.enable(not current_state, { bufnr = bufnr })
@@ -110,14 +108,14 @@ keymap.set("n", "<leader>gH", function()
 	vim.notify("Inlay hints " .. status, vim.log.levels.INFO)
 end, { desc = "Toggle inlay Hints." })
 
-keymap.set("n", "<leader>gs", vim.lsp.buf.declaration, { desc = "Go to declaration" })
-keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
-keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "Show references" })
+keymap.set("n", "gs", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
+keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Show references" })
 keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover documentation" })
 
 -- Code actions
-keymap.set({ "n", "v" }, "<leader>ca", function()
+keymap.set({ "n", "v" }, "ca", function()
 	require("fzf-lua").lsp_code_actions({
 		winopts = {
 			-- relative = "cursor",
@@ -133,7 +131,7 @@ keymap.set({ "n", "v" }, "<leader>ca", function()
 		},
 	})
 end, { desc = "Code action" })
-keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
+keymap.set("n", "rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
 
 -- Diagnostics
 keymap.set("n", "<leader>ne", function()
