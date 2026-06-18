@@ -1,7 +1,7 @@
 local gh = require("config.utils").gh
 
 vim.pack.add({
-	gh("bhagwan/fzf-lua"),
+	gh("ibhagwan/fzf-lua"),
 })
 
 require("fzf-lua").setup({
