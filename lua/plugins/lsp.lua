@@ -1,52 +1,20 @@
-return {
-	"neovim/nvim-lspconfig",
-	dependencies = {
-		"williamboman/mason.nvim",
-		"j-hui/fidget.nvim",
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		"mason-org/mason-lspconfig.nvim",
-	},
-	config = function()
-		-- Setup fidget for LSP progress notifications
-		require("fidget").setup({})
+local gh = require("config.utils").gh
 
-		-- Setup Mason for LSP server installation
-		require("mason").setup({
-			registries = {
-				"github:mason-org/mason-registry",
-				"github:Crashdummyy/mason-registry",
-			},
-			dependencies = {},
-		})
+vim.pack.add({
+	gh("neovim/nvim-lspconfig"),
+	gh("williamboman/mason.nvim"),
+	gh("j-hui/fidget.nvim"),
+})
 
-		-- List of LSP servers to ensure are installed via Mason
-		require("mason-lspconfig").setup({
-			ensure_installed = {
-				"astro",
-				"bashls",
-				"cssls",
-				"docker_compose_language_service",
-				"dockerls",
-				"html",
-				"intelephense",
-				"lua_ls",
-				"prismals",
-				"pyright",
-				"tailwindcss",
-			},
-			automatic_enabled = true,
-		})
+local ok, mason = pcall(require, "mason")
 
-		require("mason-tool-installer").setup({
-			ensure_installed = {
-				"black",
-				"blade-formatter",
-				"php-cs-fixer",
-				"prettier",
-				"ruff",
-				"stylua",
-				"twig-cs-fixer",
-			},
-		})
-	end,
-}
+if ok then
+	mason.setup({
+		registries = {
+			"github:mason-org/mason-registry",
+			"github:Crashdummyy/mason-registry",
+		},
+		dependencies = {},
+	})
+	require("fidget").setup({})
+end

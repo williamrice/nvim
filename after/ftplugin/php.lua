@@ -1,4 +1,4 @@
-vim.lsp.enable("twiggy_language_server")
+vim.lsp.enable("intelephense")
 vim.lsp.enable("html")
 
 vim.treesitter.start()

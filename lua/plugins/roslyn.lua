@@ -1,9 +1,11 @@
-return {
-	"seblyng/roslyn.nvim",
-	ft = "cs",
-	---@module 'roslyn.config'
-	---@type RoslynNvimConfig
-	opts = {
-		-- your configuration comes here; leave empty for default settings
-	},
-}
+local gh = require("config.utils").gh
+
+vim.pack.add({
+	gh("seblyng/roslyn.nvim"),
+})
+
+local ok, roslyn = pcall(require, "roslyn")
+
+if ok then
+	roslyn.setup({})
+end

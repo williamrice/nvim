@@ -1,5 +1,4 @@
-vim.lsp.enable("twiggy_language_server")
-vim.lsp.enable("html")
+vim.lsp.enable("cssls")
 
 vim.treesitter.start()
 vim.bo.autoindent = true

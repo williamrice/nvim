@@ -28,8 +28,6 @@ keymap.set("n", "<leader>sx", ":close<CR>", { desc = "Close current window." })
 
 keymap.set("n", "<leader>to", ":tabnew<CR>", { desc = "Open new tab." })
 keymap.set("n", "<leader>tx", ":tabclose<CR>", { desc = "Close current tab." })
-keymap.set("n", "<leader>tn", ":tabn<CR>", { desc = "Go to next tab." })
-keymap.set("n", "<leader>tp", ":tabp<CR>", { desc = "Go to previous tab." })
 
 -- Pane swaps
 keymap.set("n", "<C-h>", "<C-w>h", { desc = "Navigate to left pane." })
@@ -37,39 +35,39 @@ keymap.set("n", "<C-j>", "<C-w>j", { desc = "Navigate to pane below." })
 keymap.set("n", "<C-k>", "<C-w>k", { desc = "Navigate to pane above." })
 keymap.set("n", "<C-l>", "<C-w>l", { desc = "Navigate to right pane." })
 
--- Debugging Keymaps (loaded lazily when DAP is available)
+-- debugging keymaps (loaded lazily when dap is available)
 local dap_ok, dap = pcall(require, "dap")
 if dap_ok then
-	keymap.set("n", "<F5>", dap.continue, { desc = "DAP continue / start debugging" })
-	keymap.set("n", "<F10>", dap.step_over, { desc = "DAP step over" })
-	keymap.set("n", "<F11>", dap.step_into, { desc = "DAP step into" })
-	keymap.set("n", "<F12>", dap.step_out, { desc = "DAP step out" })
-	keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
-	keymap.set("n", "<leader>dt", dap.terminate, { desc = "DAP terminate / stop debugging" })
-	keymap.set("n", "<leader>dr", dap.restart, { desc = "DAP restart" })
-	keymap.set("n", "<leader>dc", dap.run_to_cursor, { desc = "Run to cursor" })
+	keymap.set("n", "<f5>", dap.continue, { desc = "dap continue / start debugging" })
+	keymap.set("n", "<f10>", dap.step_over, { desc = "dap step over" })
+	keymap.set("n", "<f11>", dap.step_into, { desc = "dap step into" })
+	keymap.set("n", "<f12>", dap.step_out, { desc = "dap step out" })
+	keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "toggle breakpoint" })
+	keymap.set("n", "<leader>dt", dap.terminate, { desc = "dap terminate / stop debugging" })
+	keymap.set("n", "<leader>dr", dap.restart, { desc = "dap restart" })
+	keymap.set("n", "<leader>dc", dap.run_to_cursor, { desc = "run to cursor" })
 end
 
 -- run lua server
 vim.keymap.set("n", "<leader>dl", function()
 	require("osv").launch({ port = 8086 })
-end, { noremap = true, desc = "Launch Lua debug server" })
+end, { noremap = true, desc = "launch lua debug server" })
 
--- Eval var under cursor
+-- eval var under cursor
 keymap.set("n", "<leader>?", function()
 	local dapui_ok, dapui = pcall(require, "dapui")
 	if dapui_ok then
 		--- @diagnostic disable-next-line: missing-fields
 		dapui.eval(nil, { enter = true })
 	end
-end, { desc = "Evaluate variable under cursor" })
+end, { desc = "evaluate variable under cursor" })
 
 keymap.set("n", "<leader>du", function()
 	local dapui_ok, dapui = pcall(require, "dapui")
 	if dapui_ok then
 		dapui.toggle()
 	end
-end, { desc = "Toggle DAP UI" })
+end, { desc = "toggle dap ui" })
 
 -- Plugin Keybinds
 ----------------------
@@ -101,8 +99,8 @@ keymap.set(
 	"<cmd>TSToolsGoToSourceDefinition<cr>",
 	{ desc = "Go to source definition in TypeScript file." }
 )
-keymap.set("n", "<leader>ge", vim.diagnostic.open_float, { desc = "Show line diagnostics." })
-keymap.set("n", "<leader>gH", function()
+keymap.set("n", "ge", vim.diagnostic.open_float, { desc = "Show line diagnostics." })
+keymap.set("n", "gH", function()
 	local bufnr = vim.api.nvim_get_current_buf()
 	local current_state = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
 	vim.lsp.inlay_hint.enable(not current_state, { bufnr = bufnr })
@@ -110,14 +108,14 @@ keymap.set("n", "<leader>gH", function()
 	vim.notify("Inlay hints " .. status, vim.log.levels.INFO)
 end, { desc = "Toggle inlay Hints." })
 
-keymap.set("n", "<leader>gs", vim.lsp.buf.declaration, { desc = "Go to declaration" })
-keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
-keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "Show references" })
+keymap.set("n", "gs", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
+keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Show references" })
 keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover documentation" })
 
 -- Code actions
-keymap.set({ "n", "v" }, "<leader>ca", function()
+keymap.set({ "n", "v" }, "ca", function()
 	require("fzf-lua").lsp_code_actions({
 		winopts = {
 			-- relative = "cursor",
@@ -133,7 +131,7 @@ keymap.set({ "n", "v" }, "<leader>ca", function()
 		},
 	})
 end, { desc = "Code action" })
-keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
+keymap.set("n", "rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
 
 -- Diagnostics
 keymap.set("n", "<leader>ne", function()
@@ -243,6 +241,9 @@ keymap.set("n", "<S-h>", "<CMD>BufferLineCyclePrev<CR>", { desc = "Go to previou
 keymap.set("n", "<S-Right>", "<CMD>BufferLineMoveNext<CR>", { desc = "Move buffer to next position." })
 keymap.set("n", "<S-Left>", "<CMD>BufferLineMovePrev<CR>", { desc = "Move buffer to previous position." })
 keymap.set("n", "<leader>ts", "<CMD>BufferLineSortByDirectory<CR>", { desc = "Sort buffers by directory." })
+
+--lazygit
+keymap.set("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 
 -- package json info
 keymap.set(

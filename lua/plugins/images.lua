@@ -1,7 +1,13 @@
-return {
-	"3rd/image.nvim",
-	build = false, -- so that it doesn't build the rock https://github.com/3rd/image.nvim/issues/91#issuecomment-2453430239
-	opts = {
+local gh = require("config.utils").gh
+
+vim.pack.add({
+	gh("3rd/image.nvim"),
+})
+
+local ok, image = pcall(require, "image")
+
+if ok then
+	image.setup({
 		processor = "magick_cli",
-	},
-}
+	})
+end
